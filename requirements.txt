@@ -1,41 +1,44 @@
-asttokens @ file:///opt/conda/conda-bld/asttokens_1646925590279/work
-backcall @ file:///home/ktietz/src/ci/backcall_1611930011877/work
-certifi @ file:///C:/Windows/TEMP/abs_e9b7158a-aa56-4a5b-87b6-c00d295b01fanefpc8_o/croots/recipe/certifi_1655968940823/work/certifi
-colorama @ file:///C:/Windows/TEMP/abs_9439aeb1-0254-449a-96f7-33ab5eb17fc8apleb4yn/croots/recipe/colorama_1657009099097/work
+asttokens==2.0.5
+backcall==0.2.0
+certifi==2022.6.15
+colorama==0.4.5
 cycler==0.11.0
-debugpy @ file:///C:/ci_310/debugpy_1642079916595/work
-decorator @ file:///opt/conda/conda-bld/decorator_1643638310831/work
-entrypoints @ file:///C:/ci/entrypoints_1649926676279/work
-executing @ file:///opt/conda/conda-bld/executing_1646925071911/work
+debugpy==1.5.1
+decorator==5.1.1
+entrypoints==0.4
+executing==0.8.3
 fonttools==4.37.1
-ipykernel @ file:///C:/b/abs_21ykzkm7y_/croots/recipe/ipykernel_1662361803478/work
-ipython @ file:///C:/ci/ipython_1657652608590/work
-jedi @ file:///C:/ci/jedi_1644315428305/work
-jupyter-core @ file:///C:/ci/jupyter_core_1651638076360/work
-jupyter_client @ file:///C:/b/abs_8fbm7986b_/croots/recipe/jupyter_client_1662504374117/work
+ipykernel==6.15.2
+ipython==8.4.0
+jedi==0.18.1
+jupyter_client==7.3.5
+jupyter-core==4.10.0
 kiwisolver==1.4.4
 matplotlib==3.5.3
-matplotlib-inline @ file:///C:/ci/matplotlib-inline_1661934094726/work
+matplotlib-inline==0.1.6
 mpmath==1.2.1
-nest-asyncio @ file:///C:/ci/nest-asyncio_1649848132512/work
+nest-asyncio==1.5.5
 numpy==1.23.2
-packaging @ file:///tmp/build/80754af9/packaging_1637314298585/work
-parso @ file:///opt/conda/conda-bld/parso_1641458642106/work
-pickleshare @ file:///tmp/build/80754af9/pickleshare_1606932040724/work
+packaging==21.3
+parso==0.8.3
+pickleshare==0.7.5
 Pillow==9.2.0
-prompt-toolkit @ file:///tmp/build/80754af9/prompt-toolkit_1633440160888/work
-psutil @ file:///C:/Windows/Temp/abs_b2c2fd7f-9fd5-4756-95ea-8aed74d0039flsd9qufz/croots/recipe/psutil_1656431277748/work
-pure-eval @ file:///opt/conda/conda-bld/pure_eval_1646925070566/work
-Pygments @ file:///opt/conda/conda-bld/pygments_1644249106324/work
-pyparsing @ file:///C:/Users/BUILDE~1/AppData/Local/Temp/abs_7f_7lba6rl/croots/recipe/pyparsing_1661452540662/work
-python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
+pip==22.1.2
+prompt-toolkit==3.0.20
+psutil==5.9.0
+pure-eval==0.2.2
+Pygments==2.11.2
+pyparsing==3.0.9
+python-dateutil==2.8.2
 pywin32==302
-pyzmq @ file:///C:/ci/pyzmq_1657616000714/work
+pyzmq==23.2.0
 scipy==1.9.1
-six @ file:///tmp/build/80754af9/six_1644875935023/work
-stack-data @ file:///opt/conda/conda-bld/stack_data_1646927590127/work
+setuptools==63.4.1
+six==1.16.0
+stack-data==0.2.0
 sympy==1.11.1
-tornado @ file:///C:/ci/tornado_1662476985533/work
-traitlets @ file:///tmp/build/80754af9/traitlets_1636710298902/work
-wcwidth @ file:///Users/ktietz/demo/mc3/conda-bld/wcwidth_1629357192024/work
+tornado==6.2
+traitlets==5.1.1
+wcwidth==0.2.5
+wheel==0.37.1
 wincertstore==0.2
