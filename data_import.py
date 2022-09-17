@@ -7,8 +7,8 @@ file_names = [i.split('\\')[-1] for i in file_names]
 
 # File Mapping Dictionary
 map = {
-    'High': 'v1',
-    'Low': 'v2'
+    'Low': 'v1',
+    'High': 'v2'
 }
 
 # Load Our Files
