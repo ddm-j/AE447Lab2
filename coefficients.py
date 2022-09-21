@@ -160,14 +160,20 @@ for file in files:
     ])
     F = np.matmul(R, Fs)
     L = F[1]/(q[file[0]]*SA)
-    D = F[0]/(q[file[0]]*SA)
+    D = -F[0]/(q[file[0]]*SA)
 
     # Store Results
     idx = AoAs.index(file[-1])
     coeff_data[file[0]][idx, 1] = L
     coeff_data[file[0]][idx, 2] = D
 
-plt.plot(coeff_data['v1'][:, 0], coeff_data['v1'][:, 1])
-plt.twinx()
-plt.plot(coeff_data['v1'][:, 0], coeff_data['v1'][:, 2])
+plt.plot(coeff_data['v1'][:, 0], coeff_data['v1'][:, 1]/coeff_data['v1'][:, 2])
+
+sim_cl = np.loadtxt('sim_coeffs/v2_cl.csv', delimiter=',', skiprows=1, usecols=(0, 1))
+sim_cd = np.loadtxt('sim_coeffs/v2_cd.csv', delimiter=',', skiprows=1, usecols=(0, 1))
+sim_r = np.zeros(sim_cl.shape)
+sim_r[:, 0] = sim_cl[:, 0]
+sim_r[:, 1] = sim_cl[:, 1]/sim_cd[:, 1]
+
+#plt.plot(sim_r[:, 0], sim_r[:, 1])
 plt.show()

@@ -23,28 +23,64 @@ data_exp = {
         j: {} for j in AoAs
     } for i in vs
 }
+data_sim = {
+    i: {
+        j: {} for j in AoAs
+    } for i in vs
+}
 
 for vel in vs:
     for a in AoAs:
         data_exp[vel][a] = (np.load('pressure_data/{0}_{1}.npy'.format(vel, a)) + 1000*9.81*delHo[vel])/(1000*9.81*delHi[vel])
+        data_sim[vel][a] = np.loadtxt('sim_data/{0}_{1}_xflr.csv'.format(vel, a), delimiter=',', skiprows=1, usecols=(0, 1))
 
-# Sim Data
-sim = np.loadtxt('sim_data/v1_0.csv', delimiter=',', skiprows=1, usecols=(0, 1))
-dmin, dmax = min(sim[:, 1]), max(sim[:, 1])
-dcord = dmax - dmin
-sim[:, 1] = (sim[:, 1] - dmin)/(dmax - dmin)
-
-
-plt.plot(x_tap, data_exp["v1"][16])
-#plt.plot(sim[:, 1], sim[:, 0])
-plt.show()
 
 # Plotting
-#fig, axs = plt.subplots(5, 2, figsize=(6.5, 9), sharex='col', sharey='row')
+fig, axs = plt.subplots(5, 2, figsize=(6.5, 9), sharex='col', sharey='row', layout='constrained')
 
-#for j, vel in enumerate(vs):
-#    for i, a in enumerate(AoAs):
-#        print(i, j)
-#        axs[i, j].plot(x_tap, data_exp[vel][a])
+# Titles
+Res = [5.8818e+4, 7.2037e+4]
+cols = ['Re = {:.2e}'.format(col) for col in Res]
+rows = ['{0}'.format(col)+r'$^{\circ}$' for col in AoAs]
+fig.suptitle('Pressure Coefficient', fontsize=11)
 
-#plt.show()
+# Styles
+from matplotlib import font_manager
+
+font_path = 'EBGaramond-Regular.ttf'  # Your font path goes here
+font_manager.fontManager.addfont(font_path)
+prop = font_manager.FontProperties(fname=font_path)
+
+plt.rcParams['font.family'] = 'sans-serif'
+plt.rcParams['font.sans-serif'] = prop.get_name()
+
+for ax, col in zip(axs[0], cols):
+    ax.set_title(col, fontsize=10)
+
+for ax, row in zip(axs[:, 0], rows):
+    ax.set_ylabel(row, fontsize=10)
+    ax.yaxis.set_label_coords(-0.15, 0.5)
+
+for j, vel in enumerate(vs):
+    for i, a in enumerate(AoAs):
+
+        # New Scales for Axis Reversal
+        miny = min(np.min(data_exp[vel][a]), np.min(data_sim[vel][a][:, 1]))
+        maxy = max(np.max(data_exp[vel][a]), np.max(data_sim[vel][a][:, 1]))
+
+        axs[i, j].plot(x_tap, data_exp[vel][a],
+                       linewidth=1,
+                       color='black')
+
+        axs[i, j].plot(data_sim[vel][a][:, 0], data_sim[vel][a][:, 1],
+                       linestyle='dotted',
+                       linewidth=1.5,
+                       color='#A9A9A9')
+        axs[i, j].set_ylim(1.2*maxy, 1.2*miny)
+
+        # Set x labels
+        if a == 16:
+            axs[i, j].set_xlabel(r'$\frac{x}{c}$', fontsize=10)
+
+plt.savefig('charts/pressure_coefficients.png', dpi=400)
+plt.show()
