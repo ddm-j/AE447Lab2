@@ -8,6 +8,7 @@ from IPython.display import display
 from scipy.interpolate import interp1d, InterpolatedUnivariateSpline
 from scipy.integrate import quadrature, simps, quad
 import itertools
+import pandas as pd
 
 
 def integrand(x, f1, f2, sign=1):
@@ -167,13 +168,16 @@ for file in files:
     coeff_data[file[0]][idx, 1] = L
     coeff_data[file[0]][idx, 2] = D
 
-plt.plot(coeff_data['v1'][:, 0], coeff_data['v1'][:, 1]/coeff_data['v1'][:, 2])
+# Load Simulation Data
+sim_data = {'v1':0, 'v2':0}
+sim_data['v1'] = pd.read_fwf('sim_coeffs/V1.txt', skiprows=list(range(9))+[10], usecols=(0, 1, 2, 4))
+sim_data['v1'].dropna(axis=0, inplace=True)
+sim_data['v2'] = pd.read_fwf('sim_coeffs/V2.txt', skiprows=list(range(9))+[10], usecols=(0, 1, 2, 4))
+sim_data['v2'].dropna(axis=0, inplace=True)
 
-sim_cl = np.loadtxt('sim_coeffs/v2_cl.csv', delimiter=',', skiprows=1, usecols=(0, 1))
-sim_cd = np.loadtxt('sim_coeffs/v2_cd.csv', delimiter=',', skiprows=1, usecols=(0, 1))
-sim_r = np.zeros(sim_cl.shape)
-sim_r[:, 0] = sim_cl[:, 0]
-sim_r[:, 1] = sim_cl[:, 1]/sim_cd[:, 1]
+coeff = 'CD'
+vel = 2
 
-#plt.plot(sim_r[:, 0], sim_r[:, 1])
+plt.plot(sim_data['v{0}'.format(vel)]['alpha'], sim_data['v{0}'.format(vel)][coeff])
+plt.plot(coeff_data['v{0}'.format(vel)][:, 0], coeff_data['v{0}'.format(vel)][:, 1 if coeff == 'CL' else 2])
 plt.show()

@@ -36,7 +36,7 @@ for vel in vs:
 
 
 # Plotting
-fig, axs = plt.subplots(5, 2, figsize=(6.5, 9), sharex='col', sharey='row', layout='constrained')
+fig, axs = plt.subplots(5, 2, figsize=(6.5, 9), sharex='col', sharey='row')
 
 # Titles
 Res = [5.8818e+4, 7.2037e+4]
@@ -61,6 +61,7 @@ for ax, row in zip(axs[:, 0], rows):
     ax.set_ylabel(row, fontsize=10)
     ax.yaxis.set_label_coords(-0.15, 0.5)
 
+legend_lines = [0, 0]
 for j, vel in enumerate(vs):
     for i, a in enumerate(AoAs):
 
@@ -68,19 +69,33 @@ for j, vel in enumerate(vs):
         miny = min(np.min(data_exp[vel][a]), np.min(data_sim[vel][a][:, 1]))
         maxy = max(np.max(data_exp[vel][a]), np.max(data_sim[vel][a][:, 1]))
 
-        axs[i, j].plot(x_tap, data_exp[vel][a],
+        p_exp = axs[i, j].plot(x_tap, data_exp[vel][a],
                        linewidth=1,
-                       color='black')
+                       color='black',
+                       label='Experimental')
 
-        axs[i, j].plot(data_sim[vel][a][:, 0], data_sim[vel][a][:, 1],
+        p_sim = axs[i, j].plot(data_sim[vel][a][:, 0], data_sim[vel][a][:, 1],
                        linestyle='dotted',
                        linewidth=1.5,
-                       color='#A9A9A9')
+                       color='#A9A9A9',
+                       label='XFOIL')
         axs[i, j].set_ylim(1.2*maxy, 1.2*miny)
+
+        if i == 0 and j == 0:
+            print(i, j)
+            handles, labels = axs[i, j].get_legend_handles_labels()
+            print(handles)
+            print(labels)
 
         # Set x labels
         if a == 16:
             axs[i, j].set_xlabel(r'$\frac{x}{c}$', fontsize=10)
 
-plt.savefig('charts/pressure_coefficients.png', dpi=400)
+
+# Figure Legend
+#labels = ['Experimental', 'XFOIL']
+#fig.legend(labels, loc='lower right', bbox_to_anchor=(1,-0.1), ncol=len(labels), bbox_transform=fig.transFigure)
+fig.legend(handles[1:], labels[1:], loc='lower right')
+
+#plt.savefig('charts/pressure_coefficients.png', dpi=400)
 plt.show()
